@@ -1,0 +1,36 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function logado() { return request.auth != null; }
+    function funcionario() {
+      return logado()
+        && exists(/databases/$(database)/documents/usuarios/$(request.auth.uid))
+        && get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.tipo == "funcionario";
+    }
+
+    match /usuarios/{uid} {
+      allow create: if logado() && request.auth.uid == uid && request.resource.data.tipo == "cliente";
+      allow read: if logado() && (request.auth.uid == uid || funcionario());
+      allow update: if funcionario() || (logado() && request.auth.uid == uid && request.resource.data.tipo == resource.data.tipo);
+      allow delete: if funcionario();
+    }
+    match /agendamentos/{id} {
+      allow create: if logado() && request.resource.data.usuario_id == request.auth.uid && request.resource.data.status == "Agendado";
+      allow read: if funcionario() || (logado() && resource.data.usuario_id == request.auth.uid);
+      allow update, delete: if funcionario();
+    }
+    match /disponibilidade/{id} {
+      allow read: if logado();
+      allow create: if logado() && request.resource.data.usuario_id == request.auth.uid;
+      allow update: if false;
+      allow delete: if funcionario();
+    }
+    match /servicos/{id} { allow read: if logado(); allow create, update, delete: if funcionario(); }
+    match /estoque/{id} { allow read, create, update, delete: if funcionario(); }
+    match /financeiro/{id} { allow read, create, update, delete: if funcionario(); }
+    match /pagamentos/{id} { allow read, create, update, delete: if funcionario(); }
+    match /configuracoes/{id} { allow read: if logado(); allow create, update, delete: if funcionario(); }
+    match /{document=**} { allow read, write: if false; }
+  }
+}

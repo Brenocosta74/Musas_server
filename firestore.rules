@@ -1,0 +1,72 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function logado() {
+      return request.auth != null;
+    }
+
+    // REGRAS DE DESENVOLVIMENTO DO PROJETO MUSAS
+    // Mantemos usuarios protegido, mas liberamos as operações do painel
+    // para usuários autenticados durante os testes locais.
+    // Antes de publicar em produção, troque pelas regras seguras incluídas
+    // no arquivo firestore.rules_PRODUCAO.txt.
+
+    match /usuarios/{uid} {
+      allow create: if logado()
+        && request.auth.uid == uid
+        && request.resource.data.tipo == "cliente";
+
+      allow read: if logado();
+
+      allow update: if logado() && (
+        request.auth.uid == uid
+        && request.resource.data.tipo == resource.data.tipo
+      );
+
+      allow delete: if false;
+    }
+
+    match /agendamentos/{id} {
+      allow read: if logado();
+      allow create: if logado()
+        && request.resource.data.usuario_id == request.auth.uid
+        && request.resource.data.status == "Agendado";
+      allow update, delete: if logado();
+    }
+
+    match /disponibilidade/{id} {
+      allow read: if logado();
+      allow create: if logado()
+        && request.resource.data.usuario_id == request.auth.uid;
+      allow update: if false;
+      allow delete: if logado();
+    }
+
+    match /servicos/{id} {
+      allow read: if logado();
+      allow create, update, delete: if logado();
+    }
+
+    match /estoque/{id} {
+      allow read, create, update, delete: if logado();
+    }
+
+    match /financeiro/{id} {
+      allow read, create, update, delete: if logado();
+    }
+
+    match /pagamentos/{id} {
+      allow read, create, update, delete: if logado();
+    }
+
+    match /configuracoes/{id} {
+      allow read, create, update, delete: if logado();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

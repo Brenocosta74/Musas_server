@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Musas | Dashboard</title>
+<link rel="preconnect" href="https://www.gstatic.com">
+<style>
+:root{
+  --bg:#0b0b0c;--panel:#151516;--panel2:#1d1d1f;--card:#19191b;--line:#2c2c30;--text:#f4f4f4;--muted:#a7a7ad;--soft:#242428;--white:#fff;--green:#81d997;--green2:#1d3324;--red:#e16d6d;--red2:#3a2020;--gold:#d8b45f;--shadow:0 24px 70px rgba(0,0,0,.42)
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at top,#171719 0,#0b0b0c 45%,#070707 100%);color:var(--text);font-family:Inter,"Segoe UI",Arial,sans-serif}.app{display:grid;grid-template-columns:255px 1fr;min-height:100vh}.sidebar{background:linear-gradient(180deg,#111113,#0a0a0b);border-right:1px solid var(--line);padding:22px 16px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column}.brand{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:20px}.brand img{width:68px;height:68px;object-fit:contain;background:#000;border-radius:14px;border:1px solid #333}.brand h1{font-size:20px;margin:0}.brand span,.muted{color:var(--muted)}.nav{display:grid;gap:8px}.nav button{border:0;background:transparent;color:#d8d8de;text-align:left;padding:13px 14px;border-radius:12px;font-weight:700;cursor:pointer;display:flex;gap:10px;align-items:center}.nav button:hover,.nav button.active{background:#242428;color:#fff}.profile{margin-top:auto;border-top:1px solid var(--line);padding-top:16px}.profile small{display:block;color:var(--muted);margin-top:4px}.logout{width:100%;margin-top:12px;border:1px solid #444;background:#202024;color:#fff;padding:11px;border-radius:12px;cursor:pointer}.main{padding:28px;max-width:1500px;width:100%;margin:0 auto}.topbar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:22px}.topbar h2{font-size:30px;margin:0}.date-pill{background:#171719;border:1px solid var(--line);padding:11px 14px;border-radius:999px;color:#d9d9dd}.page{display:none}.page.active{display:block}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card,.panel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.metric{padding:18px}.metric-head{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:14px}.icon{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:#252529;border:1px solid #333}.metric strong{display:block;font-size:24px;margin:15px 0 6px}.metric small{color:var(--muted);font-size:12px}.positive{color:var(--green)!important}.negative{color:var(--red)!important}.panel{padding:20px}.panel h3{margin:0;font-size:20px}.panel p{margin:5px 0 0;color:var(--muted);font-size:14px}.panel-head{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:16px}.grid-2{display:grid;grid-template-columns:1.45fr .95fr;gap:14px;margin-top:14px}.grid-main{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:14px}.chart{height:290px;background:#111112;border:1px solid #27272a;border-radius:16px;padding:10px;position:relative}.chart svg{width:100%;height:100%;display:block}.legend{display:flex;gap:18px;margin-top:12px;color:var(--muted);font-size:13px}.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}.dot.in{background:var(--green)}.dot.out{background:var(--red)}.donut-layout{display:flex;align-items:center;gap:18px}.donut{width:220px;height:220px;display:grid;place-items:center}.donut-center{text-align:center;position:absolute}.donut-wrap{position:relative;width:220px;height:220px;display:grid;place-items:center}.donut-details{display:grid;gap:12px;min-width:170px}.detail-row{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:14px}.detail-row strong{color:#fff}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:760px}th,td{padding:13px 11px;border-bottom:1px solid var(--line);text-align:left;font-size:14px;white-space:nowrap}th{color:#a8a8af;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.badge{display:inline-flex;align-items:center;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800;background:#29292d;color:#ddd}.badge.ok{background:var(--green2);color:var(--green)}.badge.bad{background:var(--red2);color:var(--red)}.actions{display:flex;gap:7px;flex-wrap:wrap}.btn{border:1px solid #444;background:#242428;color:#fff;border-radius:10px;padding:9px 11px;cursor:pointer;font-weight:700}.btn:hover{background:#303036}.btn.primary{background:#f4f4f4;color:#111;border-color:#fff}.btn.green{border-color:#345d3d;background:#1d3324;color:var(--green)}.btn.red{border-color:#623333;background:#321b1b;color:#ffb0b0}.filters{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.input,select{background:#111112;border:1px solid #37373c;color:#fff;border-radius:11px;padding:10px 11px;outline:0}.input:focus,select:focus{border-color:#aaa;box-shadow:0 0 0 3px rgba(255,255,255,.08)}.finance-box{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.config-card{background:#111112;border:1px solid var(--line);border-radius:15px;padding:15px}.config-card label{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}.config-card input{width:100%}.empty{padding:26px;text-align:center;color:var(--muted)}.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:18px;z-index:20}.modal-bg.show{display:flex}.modal{width:min(580px,100%);background:#19191b;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 30px 90px rgba(0,0,0,.6)}.modal-head{display:flex;justify-content:space-between;gap:14px;margin-bottom:18px}.modal-head h3{margin:0}.close{border:0;border-radius:50%;width:36px;height:36px;background:#27272b;color:#fff;font-size:20px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.full{grid-column:1/-1}.calc-box{background:#111112;border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:13px;display:grid;gap:8px}.calc-line{display:flex;justify-content:space-between;gap:12px;color:var(--muted)}.calc-line strong{color:#fff}.toast{position:fixed;right:24px;bottom:24px;background:#f4f4f4;color:#111;padding:12px 16px;border-radius:12px;font-weight:800;opacity:0;transform:translateY(14px);transition:.25s;z-index:30}.toast.show{opacity:1;transform:translateY(0)}#accessMsg{max-width:700px;margin:80px auto}.small-list{display:grid;gap:10px}.mini-item{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#111112;border:1px solid var(--line);border-radius:13px;padding:12px}.mini-item strong{display:block}.mini-item span{color:var(--muted);font-size:13px}@media(max-width:1100px){.app{grid-template-columns:78px 1fr}.brand div,.nav span,.profile div{display:none}.brand{justify-content:center}.brand img{width:48px;height:48px}.cards{grid-template-columns:repeat(2,1fr)}.grid-2,.grid-main{grid-template-columns:1fr}.sidebar{padding:18px 10px}.main{padding:20px 14px}.donut-layout{flex-direction:column;align-items:flex-start}}@media(max-width:680px){.cards,.finance-box{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}}
+</style>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+</head>
+<body>
+<div id="accessMsg" class="panel">Verificando acesso...</div>
+<div class="app" id="app" style="display:none">
+  <aside class="sidebar">
+    <div class="brand"><img src="musas.png" alt="Musas"><div><h1>Musas</h1><span>Arte da Beleza</span></div></div>
+    <nav class="nav">
+      <button class="active" data-page="dashboard">⌂ <span>Dashboard</span></button>
+      <button data-page="agenda">◷ <span>Agenda</span></button>
+      <button data-page="financeiro">R$ <span>Financeiro</span></button>
+      <button data-page="servicos">✂ <span>Serviços</span></button>
+      <button data-page="estoque">▣ <span>Estoque</span></button>
+    </nav>
+    <div class="profile"><div><strong id="profileName">Funcionário</strong><small id="profileEmail"></small></div><button class="logout" id="logoutBtn">Sair</button></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar"><div><h2 id="pageTitle">Dashboard</h2><div class="muted" id="pageSubtitle">Visão geral do negócio</div></div><div class="date-pill" id="todayLabel"></div></header>
+
+    <section id="dashboard" class="page active">
+      <div class="cards">
+        <article class="card metric"><div class="metric-head"><span>Faturamento bruto</span><div class="icon">R$</div></div><strong id="cardGross">R$ 0,00</strong><small>Total dos serviços finalizados</small></article>
+        <article class="card metric"><div class="metric-head"><span>Entradas líquidas</span><div class="icon">↑</div></div><strong id="cardNet" class="positive">R$ 0,00</strong><small>Valor real recebido</small></article>
+        <article class="card metric"><div class="metric-head"><span>Taxas</span><div class="icon">%</div></div><strong id="cardFees" class="negative">R$ 0,00</strong><small>Maquininha de cartão</small></article>
+        <article class="card metric"><div class="metric-head"><span>Lucro líquido</span><div class="icon">▥</div></div><strong id="cardProfit">R$ 0,00</strong><small>Entradas menos saídas</small></article>
+      </div>
+
+      <div class="grid-2">
+        <article class="panel"><div class="panel-head"><div><h3>Entradas e Saídas</h3><p>Movimentação financeira por dia</p></div></div><div class="chart" id="lineChart"></div><div class="legend"><span><i class="dot in"></i>Entradas</span><span><i class="dot out"></i>Saídas</span></div></article>
+        <article class="panel"><div class="panel-head"><div><h3>Resumo do Período</h3><p>Entradas líquidas x saídas</p></div></div><div class="donut-layout"><div class="donut-wrap"><div id="donutChart" class="donut"></div><div class="donut-center"><strong id="donutTotal">R$ 0,00</strong><br><span class="muted">Total líquido</span></div></div><div class="donut-details" id="donutDetails"></div></div></article>
+      </div>
+
+      <div class="grid-main">
+        <article class="panel"><div class="panel-head"><div><h3>Agenda de Hoje</h3><p>Atendimentos do dia</p></div><button class="btn" data-go="agenda">Ver agenda</button></div><div id="todayList" class="small-list"></div></article>
+        <article class="panel"><div class="panel-head"><div><h3>Estoque em Atenção</h3><p>Produtos no nível mínimo</p></div><button class="btn" data-go="estoque">Ver estoque</button></div><div id="stockAlertList" class="small-list"></div></article>
+      </div>
+    </section>
+
+    <section id="agenda" class="page">
+      <div class="panel"><div class="panel-head"><div><h3>Agenda em tempo real</h3><p>Agendamentos feitos pelos clientes aparecem automaticamente.</p></div><div class="filters"><input class="input" type="date" id="agendaDate"><button class="btn" id="clearDate">Todos</button></div></div><div class="table-wrap"><table><thead><tr><th>Data</th><th>Hora</th><th>Cliente</th><th>Serviço</th><th>Valor</th><th>Status</th><th>Ações</th></tr></thead><tbody id="agendaBody"></tbody></table></div></div>
+    </section>
+
+    <section id="financeiro" class="page">
+      <div class="cards finance-cards">
+        <article class="card metric"><div class="metric-head"><span>Bruto</span><div class="icon">R$</div></div><strong id="financeGross">R$ 0,00</strong></article>
+        <article class="card metric"><div class="metric-head"><span>Taxas</span><div class="icon">%</div></div><strong id="financeFees" class="negative">R$ 0,00</strong></article>
+        <article class="card metric"><div class="metric-head"><span>Líquido</span><div class="icon">↑</div></div><strong id="financeNet" class="positive">R$ 0,00</strong></article>
+        <article class="card metric"><div class="metric-head"><span>Saídas</span><div class="icon">↓</div></div><strong id="financeExpenses" class="negative">R$ 0,00</strong></article>
+      </div>
+      <div class="finance-box">
+        <div class="config-card"><label>Taxa Débito (%)</label><input class="input" type="number" id="taxDebit" min="0" step="0.01"><button class="btn primary" id="saveTaxes" style="margin-top:10px;width:100%">Salvar taxas</button></div>
+        <div class="config-card"><label>Taxa Crédito (%)</label><input class="input" type="number" id="taxCredit" min="0" step="0.01"><div class="muted" style="margin-top:10px;font-size:13px">Pix e dinheiro ficam com taxa 0%.</div></div>
+        <div class="config-card"><label>Adicionar saída/despesa</label><input class="input" id="expenseDesc" placeholder="Ex.: compra de produtos"><input class="input" id="expenseValue" type="number" min="0" step="0.01" placeholder="Valor" style="margin-top:8px"><button class="btn" id="addExpense" style="margin-top:10px;width:100%">Registrar saída</button></div>
+      </div>
+      <div class="panel" style="margin-top:14px"><div class="panel-head"><div><h3>Histórico financeiro</h3><p>Pagamentos e despesas registrados.</p></div></div><div class="table-wrap"><table><thead><tr><th>Data</th><th>Tipo</th><th>Descrição</th><th>Pagamento</th><th>Bruto</th><th>Taxa</th><th>Líquido</th></tr></thead><tbody id="financeBody"></tbody></table></div></div>
+    </section>
+
+    <section id="servicos" class="page">
+      <div class="panel">
+        <div class="panel-head">
+          <div><h3>Serviços</h3><p>Adicione, altere preços, duração e disponibilidade sem editar o código.</p></div>
+          <button class="btn primary" id="newServiceBtn">+ Novo serviço</button>
+        </div>
+        <div class="small-list" id="servicesList"></div>
+      </div>
+    </section>
+
+    <section id="estoque" class="page">
+      <div class="panel"><div class="panel-head"><div><h3>Estoque</h3><p>Controle simples de produtos do salão.</p></div><button class="btn primary" id="addProduct">+ Produto exemplo</button></div><div class="table-wrap"><table><thead><tr><th>Produto</th><th>Categoria</th><th>Qtd.</th><th>Mínimo</th><th>Status</th></tr></thead><tbody id="stockBody"></tbody></table></div></div>
+    </section>
+  </main>
+</div>
+
+<div class="modal-bg" id="paymentModal"><div class="modal"><div class="modal-head"><div><h3>Finalizar atendimento</h3><p class="muted" id="paymentInfo"></p></div><button class="close" id="closePayment">×</button></div><div class="form-grid"><label class="full">Forma de pagamento<select id="paymentMethod"><option>Pix</option><option>Dinheiro</option><option>Débito</option><option>Crédito</option></select></label></div><div class="calc-box"><div class="calc-line"><span>Valor bruto</span><strong id="calcGross">R$ 0,00</strong></div><div class="calc-line"><span>Taxa aplicada</span><strong id="calcPercent">0%</strong></div><div class="calc-line"><span>Taxa da maquininha</span><strong id="calcFee">R$ 0,00</strong></div><div class="calc-line"><span>Valor líquido recebido</span><strong id="calcNet">R$ 0,00</strong></div></div><div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px"><button class="btn" id="cancelPayment">Cancelar</button><button class="btn primary" id="confirmPayment">Confirmar pagamento</button></div></div></div>
+<div class="modal-bg" id="serviceModal"><div class="modal"><div class="modal-head"><div><h3 id="serviceModalTitle">Novo serviço</h3><p class="muted">O serviço será atualizado também na página de agendamento.</p></div><button class="close" id="closeServiceModal">×</button></div><div class="form-grid"><label class="full">Nome do serviço<input class="input" id="serviceName" placeholder="Ex.: Escova" maxlength="80"></label><label>Preço (R$)<input class="input" id="servicePrice" type="number" min="0" step="0.01" placeholder="65,00"></label><label>Duração<input class="input" id="serviceDuration" placeholder="Ex.: 45min"></label><label class="full" style="display:flex;align-items:center;gap:10px;background:#111112;border:1px solid var(--line);padding:12px;border-radius:12px"><input id="serviceActive" type="checkbox" checked> Serviço disponível para agendamento</label></div><div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px"><button class="btn" id="cancelService">Cancelar</button><button class="btn primary" id="saveService">Salvar serviço</button></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+firebase.initializeApp(FIREBASE_CONFIG);const auth=firebase.auth();const db=firebase.firestore();
+let unsubAgenda=null,unsubFinance=null,unsubStock=null,unsubConfig=null,unsubServices=null;let agendamentos=[],financeiro=[],estoque=[],servicos=[],taxas={debito:2,credito:3.5};let currentPayment=null;let currentServiceId=null;
+const DEFAULT_SERVICES=[{id:'corte',nome:'✂️ Corte e Escova',preco:65,duracao:'45min',ativo:true,ordem:1},{id:'coloracao',nome:'🎨 Coloração + Matização',preco:120,duracao:'1h30',ativo:true,ordem:2},{id:'manicure',nome:'💅 Manicure & Pedicure',preco:55,duracao:'1h',ativo:true,ordem:3},{id:'hidratacao',nome:'💧 Hidratação Capilar',preco:80,duracao:'50min',ativo:true,ordem:4}];
+const $=id=>document.getElementById(id);const money=v=>Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});const num=v=>Number(String(v||0).replace(',','.'))||0;const todayISO=()=>{const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)};const fmt=d=>{const p=(d||'').split('-');return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:d};function toast(t){$('toast').textContent=t;$('toast').classList.add('show');clearTimeout(window.t);window.t=setTimeout(()=>$('toast').classList.remove('show'),2200)}
+function normalizeTipo(t){return String(t||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+function page(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));$(id).classList.add('active');document.querySelector(`[data-page="${id}"]`)?.classList.add('active');const titles={dashboard:['Dashboard','Visão geral do negócio'],agenda:['Agenda','Atendimentos em tempo real'],financeiro:['Financeiro','Entradas, saídas, taxas e lucro real'],servicos:['Serviços','Preços e durações'],estoque:['Estoque','Produtos e alertas']};$('pageTitle').textContent=titles[id][0];$('pageSubtitle').textContent=titles[id][1]}
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>page(b.dataset.page));document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>page(b.dataset.go));$('todayLabel').textContent=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'});$('clearDate').onclick=()=>{$('agendaDate').value='';renderAgenda()};$('agendaDate').onchange=renderAgenda;
+function statusClass(s){return s==='Finalizado'?'ok':(s==='Cancelado'||s==='Não compareceu'?'bad':'')}
+function renderAgenda(){const filter=$('agendaDate').value;let arr=agendamentos.slice().sort((a,b)=>(a.data+a.horario).localeCompare(b.data+b.horario));if(filter)arr=arr.filter(a=>a.data===filter);$('agendaBody').innerHTML=arr.length?arr.map(a=>{const final=a.status==='Finalizado';return `<tr><td>${fmt(a.data)}</td><td>${a.horario||''}</td><td>${a.cliente_nome||''}<br><span class="muted">${a.cliente_email||''}</span></td><td>${a.servico||''}</td><td>${formatAppointmentValue(a)}</td><td><span class="badge ${statusClass(a.status)}">${a.status||'Agendado'}</span></td><td><div class="actions"><button class="btn" onclick="setStatus('${a.id}','Confirmado')">Confirmar</button><button class="btn" onclick="setStatus('${a.id}','Em atendimento')">Atender</button>${!final?`<button class="btn green" onclick="openPayment('${a.id}')">Finalizar</button>`:''}<button class="btn red" onclick="setStatus('${a.id}','Cancelado')">Cancelar</button></div></td></tr>`}).join(''):'<tr><td colspan="7" class="empty">Nenhum agendamento encontrado.</td></tr>';renderSummary()}
+function formatAppointmentValue(a){if(typeof a.valor_final==='number')return money(a.valor_final); if(String(a.valor_final||'').includes('R$'))return a.valor_final; return money(parseMoney(a.valor_final||a.valor_original||0))}
+function parseMoney(v){if(typeof v==='number')return v;return Number(String(v).replace('R$','').replace(/\./g,'').replace(',','.').trim())||0}
+async function setStatus(id,status){
+  try{
+    const ref=db.collection('agendamentos').doc(id);
+    await ref.update({status,atualizado_em:firebase.firestore.FieldValue.serverTimestamp()});
+    if(status==='Cancelado'){
+      await db.collection('disponibilidade').doc(id).delete().catch(()=>{});
+    }
+    toast('Status atualizado para '+status);
+  }catch(e){
+    console.error('Erro ao atualizar status:',e);
+    toast('Erro ao atualizar: '+(e.code||e.message));
+  }
+}
+function openPayment(id){const a=agendamentos.find(x=>x.id===id);if(!a)return;currentPayment=a;$('paymentInfo').textContent=`${a.cliente_nome||''} • ${a.servico||''} • ${fmt(a.data)} ${a.horario||''}`;$('paymentMethod').value='Pix';calcPayment();$('paymentModal').classList.add('show')}
+function closePayment(){$('paymentModal').classList.remove('show');currentPayment=null}$('closePayment').onclick=closePayment;$('cancelPayment').onclick=closePayment;$('paymentMethod').onchange=calcPayment;
+function calcPayment(){if(!currentPayment)return;const bruto=parseMoney(currentPayment.valor_final||currentPayment.valor_original||0);const m=$('paymentMethod').value;let perc=0;if(m==='Débito')perc=num(taxas.debito);if(m==='Crédito')perc=num(taxas.credito);const taxa=bruto*(perc/100);const liquido=bruto-taxa;$('calcGross').textContent=money(bruto);$('calcPercent').textContent=perc.toFixed(2).replace('.',',')+'%';$('calcFee').textContent=money(taxa);$('calcNet').textContent=money(liquido)}
+$('confirmPayment').onclick=async()=>{
+  if(!currentPayment)return;
+  const btn=$('confirmPayment');
+  const originalText=btn.textContent;
+  try{
+    btn.disabled=true;
+    btn.textContent='Confirmando...';
+
+    const bruto=parseMoney(currentPayment.valor_final||currentPayment.valor_original||0);
+    if(!Number.isFinite(bruto)||bruto<=0) throw new Error('Valor do atendimento inválido.');
+
+    const metodo=$('paymentMethod').value;
+    const perc=metodo==='Débito'?num(taxas.debito):metodo==='Crédito'?num(taxas.credito):0;
+    const taxa=bruto*(perc/100);
+    const liquido=bruto-taxa;
+    const id=currentPayment.id;
+
+    const agendaRef=db.collection('agendamentos').doc(id);
+    const pagamentoRef=db.collection('pagamentos').doc(id);
+    const financeiroRef=db.collection('financeiro').doc('pag_'+id);
+
+    const pagamentoExistente=await pagamentoRef.get();
+    if(pagamentoExistente.exists){
+      throw new Error('Este atendimento já possui pagamento confirmado.');
+    }
+
+    const batch=db.batch();
+    batch.set(pagamentoRef,{
+      agendamento_id:id,
+      cliente_nome:currentPayment.cliente_nome||'',
+      cliente_email:currentPayment.cliente_email||'',
+      servico:currentPayment.servico||'',
+      forma_pagamento:metodo,
+      valor_bruto:bruto,
+      taxa_percentual:perc,
+      valor_taxa:taxa,
+      valor_liquido:liquido,
+      data:currentPayment.data||todayISO(),
+      criado_em:firebase.firestore.FieldValue.serverTimestamp()
+    });
+    batch.set(financeiroRef,{
+      tipo:'Entrada',
+      descricao:`Pagamento - ${currentPayment.servico||''}`,
+      categoria:'Serviços',
+      forma_pagamento:metodo,
+      valor_bruto:bruto,
+      taxa_percentual:perc,
+      valor_taxa:taxa,
+      valor_liquido:liquido,
+      valor:liquido,
+      data:currentPayment.data||todayISO(),
+      agendamento_id:id,
+      criado_em:firebase.firestore.FieldValue.serverTimestamp()
+    });
+    batch.update(agendaRef,{
+      status:'Finalizado',
+      pagamento_confirmado:true,
+      forma_pagamento:metodo,
+      valor_bruto:bruto,
+      taxa_percentual:perc,
+      valor_taxa:taxa,
+      valor_liquido:liquido,
+      finalizado_em:firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    await batch.commit();
+    closePayment();
+    toast('Pagamento confirmado • líquido '+money(liquido));
+  }catch(e){
+    console.error('Erro ao confirmar pagamento:',e);
+    toast('Erro no pagamento: '+(e.code||e.message));
+  }finally{
+    btn.disabled=false;
+    btn.textContent=originalText;
+  }
+}
+function renderFinance(){let entradas=0,saidas=0,tax=0,gross=0;financeiro.forEach(f=>{if(f.tipo==='Entrada'){gross+=num(f.valor_bruto||f.valor_liquido||f.valor);tax+=num(f.valor_taxa);entradas+=num(f.valor_liquido||f.valor)}else{saidas+=num(f.valor_liquido||f.valor)}});const profit=entradas-saidas;$('cardGross').textContent=$('financeGross').textContent=money(gross);$('cardNet').textContent=$('financeNet').textContent=money(entradas);$('cardFees').textContent=$('financeFees').textContent=money(tax);$('financeExpenses').textContent=money(saidas);$('cardProfit').textContent=money(profit);$('cardProfit').className=profit>=0?'positive':'negative';$('financeBody').innerHTML=financeiro.length?financeiro.slice().sort((a,b)=>(b.data||'').localeCompare(a.data||'')).map(f=>`<tr><td>${fmt(f.data)}</td><td><span class="badge ${f.tipo==='Entrada'?'ok':'bad'}">${f.tipo}</span></td><td>${f.descricao||''}</td><td>${f.forma_pagamento||'-'}</td><td>${money(f.valor_bruto||f.valor_liquido||f.valor)}</td><td>${money(f.valor_taxa||0)}</td><td>${money(f.valor_liquido||f.valor)}</td></tr>`).join(''):'<tr><td colspan="7" class="empty">Nenhuma movimentação financeira.</td></tr>';drawCharts(entradas,saidas);renderSummary()}
+function renderSummary(){const t=todayISO();const today=agendamentos.filter(a=>a.data===t&&a.status!=='Cancelado');$('todayList').innerHTML=today.length?today.map(a=>`<div class="mini-item"><div><strong>${a.horario} • ${a.cliente_nome||''}</strong><span>${a.servico||''} • ${a.status||'Agendado'}</span></div><b>${formatAppointmentValue(a)}</b></div>`).join(''):'<div class="empty">Nenhum atendimento para hoje.</div>';}
+function renderStock(){if(!estoque.length){$('stockBody').innerHTML='<tr><td colspan="5" class="empty">Nenhum produto cadastrado.</td></tr>';$('stockAlertList').innerHTML='<div class="empty">Sem alertas de estoque.</div>';return}$('stockBody').innerHTML=estoque.map(p=>{const low=num(p.quantidade)<=num(p.minimo);return `<tr><td>${p.produto}</td><td>${p.categoria||''}</td><td>${p.quantidade}</td><td>${p.minimo}</td><td><span class="badge ${low?'bad':'ok'}">${low?'Baixo':'Normal'}</span></td></tr>`}).join('');const lows=estoque.filter(p=>num(p.quantidade)<=num(p.minimo));$('stockAlertList').innerHTML=lows.length?lows.map(p=>`<div class="mini-item"><div><strong>${p.produto}</strong><span>Mínimo: ${p.minimo}</span></div><b>${p.quantidade}</b></div>`).join(''):'<div class="empty">Todos os produtos estão em nível normal.</div>'}
+function renderServices(){
+  const list=$('servicesList');
+  if(!servicos.length){list.innerHTML='<div class="empty">Nenhum serviço cadastrado.</div>';return}
+  list.innerHTML=servicos.slice().sort((a,b)=>(a.ordem||999)-(b.ordem||999)||(a.nome||'').localeCompare(b.nome||'')).map(s=>`<div class="mini-item"><div><strong>${s.nome||''}</strong><span>Duração: ${s.duracao||'-'} • ${s.ativo===false?'Desativado':'Disponível'}</span></div><div class="actions"><b style="margin-right:8px">${money(s.preco)}</b><button class="btn" onclick="editService('${s.id}')">Editar</button><button class="btn ${s.ativo===false?'green':''}" onclick="toggleService('${s.id}')">${s.ativo===false?'Ativar':'Desativar'}</button><button class="btn red" onclick="deleteService('${s.id}')">Excluir</button></div></div>`).join('')
+}
+async function seedServicesIfNeeded(){
+  const snap=await db.collection('servicos').limit(1).get();
+  if(!snap.empty)return;
+  const batch=db.batch();
+  DEFAULT_SERVICES.forEach(s=>{const ref=db.collection('servicos').doc(s.id);batch.set(ref,{nome:s.nome,preco:s.preco,duracao:s.duracao,ativo:s.ativo,ordem:s.ordem,criado_em:firebase.firestore.FieldValue.serverTimestamp()})});
+  await batch.commit();
+}
+function openServiceModal(service=null){
+  currentServiceId=service?.id||null;
+  $('serviceModalTitle').textContent=service?'Editar serviço':'Novo serviço';
+  $('serviceName').value=service?.nome||'';
+  $('servicePrice').value=service?.preco??'';
+  $('serviceDuration').value=service?.duracao||'';
+  $('serviceActive').checked=service?.ativo!==false;
+  $('serviceModal').classList.add('show');
+  setTimeout(()=>$('serviceName').focus(),50);
+}
+function closeServiceModal(){ $('serviceModal').classList.remove('show'); currentServiceId=null; }
+function editService(id){const service=servicos.find(s=>s.id===id);if(service)openServiceModal(service)}
+async function toggleService(id){try{const service=servicos.find(s=>s.id===id);if(!service)return;await db.collection('servicos').doc(id).update({ativo:service.ativo===false,atualizado_em:firebase.firestore.FieldValue.serverTimestamp()});toast(service.ativo===false?'Serviço ativado':'Serviço desativado')}catch(e){console.error(e);toast('Erro: '+(e.code||e.message))}}
+async function deleteService(id){const service=servicos.find(s=>s.id===id);if(!service)return;if(!confirm(`Excluir "${service.nome}"?\n\nAgendamentos antigos não serão apagados.`))return;try{await db.collection('servicos').doc(id).delete();toast('Serviço excluído')}catch(e){console.error(e);toast('Erro ao excluir: '+(e.code||e.message))}}
+$('newServiceBtn').onclick=()=>openServiceModal();$('closeServiceModal').onclick=closeServiceModal;$('cancelService').onclick=closeServiceModal;
+$('saveService').onclick=async()=>{const nome=$('serviceName').value.trim();const preco=num($('servicePrice').value);const duracao=$('serviceDuration').value.trim();const ativo=$('serviceActive').checked;if(!nome)return toast('Digite o nome do serviço');if(preco<0)return toast('Preço inválido');if(!duracao)return toast('Digite a duração');const btn=$('saveService');const old=btn.textContent;try{btn.disabled=true;btn.textContent='Salvando...';const data={nome,preco,duracao,ativo,atualizado_em:firebase.firestore.FieldValue.serverTimestamp()};if(currentServiceId){await db.collection('servicos').doc(currentServiceId).set(data,{merge:true});toast('Serviço atualizado')}else{data.criado_em=firebase.firestore.FieldValue.serverTimestamp();data.ordem=servicos.length+1;await db.collection('servicos').add(data);toast('Serviço adicionado')}closeServiceModal()}catch(e){console.error(e);toast('Erro ao salvar: '+(e.code||e.message))}finally{btn.disabled=false;btn.textContent=old}};
+
+function drawCharts(entradas,saidas){const byDate={};financeiro.forEach(f=>{const d=f.data||todayISO();byDate[d]??={in:0,out:0};if(f.tipo==='Entrada')byDate[d].in+=num(f.valor_liquido||f.valor);else byDate[d].out+=num(f.valor_liquido||f.valor)});let dates=Object.keys(byDate).sort().slice(-7);if(!dates.length){dates=[todayISO()];byDate[dates[0]]={in:0,out:0}}const max=Math.max(1,...dates.flatMap(d=>[byDate[d].in,byDate[d].out]));const w=620,h=245,p=32;const point=(v,i)=>`${p+i*((w-2*p)/Math.max(1,dates.length-1))},${h-p-(v/max)*(h-2*p)}`;const path=key=>dates.map((d,i)=>(i?'L':'M')+point(byDate[d][key],i)).join(' ');const xlabels=dates.map((d,i)=>{const [y,m,da]=d.split('-');const x=p+i*((w-2*p)/Math.max(1,dates.length-1));return `<text x="${x}" y="235" text-anchor="middle" fill="#86868d" font-size="11">${da}/${m}</text>`}).join('');$('lineChart').innerHTML=`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><defs><linearGradient id="gin" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#81d997" stop-opacity=".55"/><stop offset="1" stop-color="#81d997" stop-opacity="0"/></linearGradient></defs><path d="M${p},${h-p} ${path('in').replace('M','L')} L${w-p},${h-p}Z" fill="url(#gin)"/><path d="${path('in')}" fill="none" stroke="#81d997" stroke-width="3"/><path d="${path('out')}" fill="none" stroke="#e16d6d" stroke-width="3"/>${xlabels}</svg>`;const total=Math.max(1,entradas+saidas),pin=entradas/total*100,pout=100-pin;$('donutTotal').textContent=money(entradas);$('donutChart').innerHTML=`<svg viewBox="0 0 42 42"><circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#2b2b30" stroke-width="7"/><circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#81d997" stroke-width="7" stroke-dasharray="${pin} ${100-pin}" stroke-dashoffset="25"/><circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#e16d6d" stroke-width="7" stroke-dasharray="${pout} ${100-pout}" stroke-dashoffset="${25-pin}"/></svg>`;$('donutDetails').innerHTML=`<div class="detail-row"><span><i class="dot in"></i>Entradas</span><strong>${money(entradas)}</strong></div><div class="detail-row"><span><i class="dot out"></i>Saídas</span><strong>${money(saidas)}</strong></div><div class="detail-row"><span>Resultado</span><strong class="${entradas-saidas>=0?'positive':'negative'}">${money(entradas-saidas)}</strong></div>`}
+$('saveTaxes').onclick=async()=>{taxas={debito:num($('taxDebit').value),credito:num($('taxCredit').value)};await db.collection('configuracoes').doc('taxas').set(taxas,{merge:true});toast('Taxas salvas')};$('addExpense').onclick=async()=>{const desc=$('expenseDesc').value.trim();const val=num($('expenseValue').value);if(!desc||!val)return toast('Preencha a despesa');await db.collection('financeiro').add({tipo:'Saída',descricao:desc,categoria:'Despesa',valor_liquido:val,valor:val,data:todayISO(),criado_em:firebase.firestore.FieldValue.serverTimestamp()});$('expenseDesc').value='';$('expenseValue').value='';toast('Saída registrada')};$('addProduct').onclick=async()=>{await db.collection('estoque').add({produto:'Shampoo Hidratante',categoria:'Cabelo',quantidade:4,minimo:5,criado_em:firebase.firestore.FieldValue.serverTimestamp()});toast('Produto exemplo criado')};
+function startListeners(){seedServicesIfNeeded().catch(e=>console.error('Erro ao criar serviços iniciais:',e));unsubAgenda=db.collection('agendamentos').onSnapshot(s=>{agendamentos=[];s.forEach(d=>agendamentos.push({id:d.id,...d.data()}));renderAgenda()},e=>{$('agendaBody').innerHTML=`<tr><td colspan="7" class="negative">${e.message}</td></tr>`});unsubFinance=db.collection('financeiro').onSnapshot(s=>{financeiro=[];s.forEach(d=>financeiro.push({id:d.id,...d.data()}));renderFinance()},e=>{$('financeBody').innerHTML=`<tr><td colspan="7" class="negative">${e.message}</td></tr>`});unsubStock=db.collection('estoque').onSnapshot(s=>{estoque=[];s.forEach(d=>estoque.push({id:d.id,...d.data()}));renderStock()},e=>{$('stockBody').innerHTML=`<tr><td colspan="5" class="negative">${e.message}</td></tr>`});unsubConfig=db.collection('configuracoes').doc('taxas').onSnapshot(s=>{if(s.exists)taxas={...taxas,...s.data()};$('taxDebit').value=taxas.debito;$('taxCredit').value=taxas.credito;calcPayment()});unsubServices=db.collection('servicos').onSnapshot(s=>{servicos=[];s.forEach(d=>servicos.push({id:d.id,...d.data()}));renderServices()},e=>{$('servicesList').innerHTML=`<div class="negative">${e.message}</div>`});}
+auth.onAuthStateChanged(async user=>{if(!user){location.href='index.html';return}try{const snap=await db.collection('usuarios').doc(user.uid).get();const profile=snap.exists?snap.data():null;const tipo=normalizeTipo(profile?.tipo);console.log('Tipo do usuário no dashboard:',tipo);if(!profile||tipo!=='funcionario'){$('accessMsg').innerHTML='<span class="negative">Acesso negado. Esta conta não está marcada como funcionário.</span><br><span class="muted">No Firestore, altere o campo tipo para funcionario.</span>';return}$('profileName').textContent=profile.nome||user.displayName||'Funcionário';$('profileEmail').textContent=profile.email||user.email||'';$('accessMsg').style.display='none';$('app').style.display='grid';startListeners()}catch(e){$('accessMsg').innerHTML='<span class="negative">'+e.message+'</span>'}});
+$('logoutBtn').onclick=async()=>{[unsubAgenda,unsubFinance,unsubStock,unsubConfig,unsubServices].forEach(fn=>fn&&fn());await auth.signOut();location.href='index.html'};
+</script>
+</body></html>
